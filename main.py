@@ -26,7 +26,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+@app.get("/")
+def root():
+    return {
+        "message": "FinTrack Profitability API is running",
+        "docs": "/docs",
+        "health": "/health",
+    }
 @app.on_event("startup")
 def load_model() -> None:
     # Trains/loads the model once when the server boots, not per-request.
